@@ -6,6 +6,8 @@ Thanks for [this](https://github.com/ext452/game_center), that I can make it fas
   - authenticate
   - isAuthenticated
   - showLeadBoard
+  - loadScore
+  - submitScore
   
 ## Useage
 ```dart
