@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import GameKit
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {

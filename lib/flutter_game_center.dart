@@ -1,13 +1,91 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/services.dart';
 
+typedef CallBacks = void Function(dynamic data);
+
+enum TimeScope{ALLTIME,TODAY,WEEK}
 class FlutterGameCenter {
+  static const _AUTHENTICATE = "authenticate";
+  static const _IS_AUTHENTICATED = "isAuthenticated";
+  static const _SUBMITSCORE = "submitScore";
+  static const _SHOWLEADERBOARD = "showLeaderboard";
+  static const _LOADSCORE = "loadScore";
   static const MethodChannel _channel =
       const MethodChannel('flutter_game_center');
+  static CallBacks scoreCallBack;
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+  static Future _callBack(MethodCall call) {
+    switch (call.method) {
+      case 'scoreCallBack':
+        if (scoreCallBack != null) scoreCallBack(call.arguments);
+        break;
+    }
+  }
+
+  static bool _isInit = false;
+  static bool get check {
+    if (!Platform.isIOS) return false;
+    if (!_isInit) {
+      _channel.setMethodCallHandler(_callBack);
+      _isInit = true;
+    }
+    return true;
+  }
+
+  static Future<bool> authenticate() async {
+    if (!check) return false;
+    try {
+      final result = await _channel.invokeMethod(_AUTHENTICATE);
+      print(result);
+      return result;
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
+
+  static Future<bool> isAuthenticated() async {
+    if (!check) return false;
+    try {
+      final result = await _channel.invokeMethod(_IS_AUTHENTICATED);
+      return result;
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
+
+  static Future<bool> submitScore(Map<String, int> params) async {
+    if (!check) return false;
+    try {
+      final result = await _channel.invokeMethod(_SUBMITSCORE, params);
+      return result;
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
+
+  static Future<bool> showLeadBoard(String leaderBoardID) async {
+    if (!check) return false;
+    final bool result =
+        await _channel.invokeMethod(_SHOWLEADERBOARD, leaderBoardID);
+
+    if (result == true) {
+      return true;
+    } else {
+      return Future.error(false);
+    }
+  }
+
+  static Future<dynamic> loadScore(String leaderBoardID,TimeScope scope) async {
+    if (!check) return null;
+      final Map<String, int> data = {leaderBoardID: scope.index};
+    final result = await _channel.invokeMethod(_LOADSCORE, data);
+
+    return result;
   }
 }
