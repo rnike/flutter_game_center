@@ -2,13 +2,24 @@
 The reason I made this is because I can't find any plugin which I can use in my dart version.
 Thanks for [this](https://github.com/ext452/game_center), that I can make it faster, appreciate it.
 
-## Now avaliable methods:
+## Now avaliable methods
   - authenticate
   - isAuthenticated
   - showLeadBoard
   - loadScore
   - submitScore
+## Install
+pubspec.yaml
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  ....
   
+  # Add this 
+  flutter_game_center:
+    git: https://github.com/yum650350/flutter_game_center.git
+```
 ## Useage
 ```dart
 import 'package:flutter_game_center/flutter_game_center.dart';
