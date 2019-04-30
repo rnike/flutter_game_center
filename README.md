@@ -1,6 +1,11 @@
 # Flutter Game Center Plugin
 The reason I made this is because I can't find any plugin which I can use in my dart version.
+
 Thanks for [this](https://github.com/ext452/game_center), that I can make it faster, appreciate it.
+
+## CAUTION
+
+Only avaliable on iOS.
 
 ## Now avaliable methods
   - authenticate
