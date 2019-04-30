@@ -58,10 +58,11 @@ class FlutterGameCenter {
     return false;
   }
 
-  static Future<bool> submitScore(Map<String, int> params) async {
+  static Future<bool> submitScore(String leaderboardID,int score) async {
     if (!check) return false;
     try {
-      final result = await _channel.invokeMethod(_SUBMITSCORE, params);
+      final Map<String, int> data = {leaderboardID: score};
+      final result = await _channel.invokeMethod(_SUBMITSCORE, data);
       return result;
     } catch (e) {
       print(e);
