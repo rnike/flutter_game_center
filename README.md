@@ -33,7 +33,7 @@ import 'package:flutter_game_center/flutter_game_center.dart';
 const LEADERBOARD_ID_IOS = 'your_leaderboard_id';
 
 //authenticate
-bool signIn = await FlutterGameCenter.authenticate();
+await FlutterGameCenter.authenticate();
 
 //check authenticate
 bool isSignIn = await FlutterGameCenter.isAuthenticated();
