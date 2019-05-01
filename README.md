@@ -25,6 +25,20 @@ dependencies:
   flutter_game_center:
     git: https://github.com/yum650350/flutter_game_center.git
 ```
+The plug in use Swift 4.0, so make sure you've set the SWIFT_VERSION to 4.0
+
+If your project is create by 
+```
+$flutter create -i swift PROJECT_NAME
+```
+
+if should work fine, check the Swift version in the Build Settings.
+
+Otherwise you should add an User-Define Setting named SWIFT_VERSION with a value 4.0.
+
+Click the pluse icon at the top of the Build Settings page, you can see "Add User-Define Setting".
+
+
 ## Useage
 ```dart
 import 'package:flutter_game_center/flutter_game_center.dart';
