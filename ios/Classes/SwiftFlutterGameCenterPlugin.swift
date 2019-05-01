@@ -40,7 +40,7 @@ public class SwiftFlutterGameCenterPlugin: NSObject, GKGameCenterControllerDeleg
             let leaderBoardId = args?.allKeys[0] as! String
             let scope = args?.value(forKey: leaderBoardId) as! Int
             let tc:GKLeaderboardTimeScope = scope == 0 ? .allTime : scope == 1 ?.today : .week
-            let data = loadScore(leadBoardId: leaderBoardId,timeScope:tc){
+            _ = loadScore(leadBoardId: leaderBoardId,timeScope:tc){
                 (output) in
                 result(output)
             }
@@ -48,17 +48,18 @@ public class SwiftFlutterGameCenterPlugin: NSObject, GKGameCenterControllerDeleg
             result("No such mathod")
     }  
   }
-    func authenticate() -> Bool {
+    func authenticate() -> Bool{
         let localPlayer = GKLocalPlayer.localPlayer()
+        
         localPlayer.authenticateHandler = {
             (view, error) in
             if error != nil {
-                //error
+                 
             } else if view != nil {
                 UIApplication.shared.keyWindow?.rootViewController?.present(view!, animated: true, completion: nil)
             }
             else {
-                print(localPlayer.isAuthenticated)
+            
             }
         }
         return true

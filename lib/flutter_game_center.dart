@@ -15,26 +15,9 @@ class FlutterGameCenter {
   static const _LOADSCORE = "loadScore";
   static const MethodChannel _channel =
       const MethodChannel('flutter_game_center');
-  static CallBacks scoreCallBack;
 
-  static Future _callBack(MethodCall call) {
-    switch (call.method) {
-      case 'scoreCallBack':
-        if (scoreCallBack != null) scoreCallBack(call.arguments);
-        break;
-    }
-  }
-
-  static bool _isInit = false;
-  static bool get check {
-    if (!Platform.isIOS) return false;
-    if (!_isInit) {
-      _channel.setMethodCallHandler(_callBack);
-      _isInit = true;
-    }
-    return true;
-  }
-
+  static bool get check => Platform.isIOS;
+  
   static Future<bool> authenticate() async {
     if (!check) return false;
     try {
@@ -43,8 +26,8 @@ class FlutterGameCenter {
       return result;
     } catch (e) {
       print(e);
-    }
     return false;
+    }
   }
 
   static Future<bool> isAuthenticated() async {
