@@ -32,7 +32,7 @@ If your project is create by
 $flutter create -i swift PROJECT_NAME
 ```
 
-if should work fine, check the Swift version in the Build Settings.
+it should work fine, check the Swift version in the Build Settings.
 
 Otherwise you should edite the Podfile in /ios 
 
