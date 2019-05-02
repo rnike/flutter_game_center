@@ -34,7 +34,25 @@ $flutter create -i swift PROJECT_NAME
 
 if should work fine, check the Swift version in the Build Settings.
 
-Otherwise you should add an User-Define Setting named SWIFT_VERSION with a value 4.0.
+Otherwise you should edite the Podfile in /ios 
+
+```
+target 'Runner' do
+  use_frameworks!  # add this
+  ...
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '4.0'  # add this
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+    end
+  end
+end
+```
+
+If still doesn't work, add an User-Define Setting named SWIFT_VERSION with a value 4.0.
 
 Click the pluse icon at the top of the Build Settings page, you can see "Add User-Define Setting".
 
